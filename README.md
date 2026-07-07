@@ -1,6 +1,6 @@
-# ScalerCipher Website
+# ScaleCipher Website
 
-A professional website for ScalerCipher — an intelligent edge computing software company founded by Shashank Maurya, specializing in embedded systems, Edge AI, and IoT platform development.
+A professional website for ScaleCipher — an intelligent edge computing software company founded by Shashank Maurya, specializing in embedded systems, Edge AI, and IoT platform development.
 
 ## 🚀 Quick Start
 
@@ -39,9 +39,9 @@ git add .
 git commit -m "Initial commit: EdgeCore Solutions website"
 
 # Create a GitHub repository and push
-gh repo create your-username/scalercipher-website --public --source=. --push
+gh repo create shankey2050/sc_web --public --source=. --push
 # OR manually:
-git remote add origin https://github.com/your-username/scalercipher-website.git
+git remote add origin https://github.com/shankey2050/sc_web.git
 git branch -M main
 git push -u origin main
 ```
@@ -54,7 +54,7 @@ git push -u origin main
 4. Select **main** branch and **/ (root)** folder
 5. Click **Save**
 
-Your site will be live at `https://your-username.github.io/scalercipher-website/`
+Your site will be live at `https://shankey2050.github.io/sc_web/`
 
 ## 🔗 Connect GoDaddy Domain to GitHub Pages
 
@@ -134,4 +134,4 @@ The contact form currently shows a success message without sending data. To conn
 
 ## 📄 License
 
-© 2026 ScalerCipher. All rights reserved. Founded by Shashank Maurya.
+© 2026 ScaleCipher. All rights reserved. Founded by Shashank Maurya.
