@@ -132,7 +132,9 @@
 <script>
     // ── Credentials (client-side, for GitHub Pages) ──
     const CREDENTIALS = { username: "admin", password: "scalecipher2026" };
-    const API_URL = "http://15.206.166.236:8081/api/v1/events/all?limit=200";
+    // Use CORS proxy to bypass Mixed Content (HTTPS page → HTTP API)
+    const API_BASE = "http://15.206.166.236:8081";
+    const API_URL = "https://corsproxy.io/?" + encodeURIComponent(API_BASE + "/api/v1/events/all?limit=200");
     const SESSION_KEY = "sc_auth";
 
     // ── Login ──
