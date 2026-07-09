@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScaleCipher - Attendance Dashboard</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+
+        /* ── Login Screen ── */
+        #login-screen {
+            display: flex; align-items: center; justify-content: center;
+            min-height: 100vh; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        .login-box {
+            background: #1e293b; border: 1px solid #334155; border-radius: 16px;
+            padding: 48px 40px; width: 100%; max-width: 400px; text-align: center;
+        }
+        .login-box .logo { font-size: 40px; margin-bottom: 8px; }
+        .login-box h1 { font-size: 24px; color: #38bdf8; margin-bottom: 4px; }
+        .login-box p { color: #94a3b8; font-size: 14px; margin-bottom: 32px; }
+        .login-box input {
+            width: 100%; padding: 12px 16px; background: #0f172a; border: 1px solid #334155;
+            border-radius: 8px; color: #e2e8f0; font-size: 15px; margin-bottom: 12px; outline: none;
+        }
+        .login-box input:focus { border-color: #38bdf8; }
+        .login-box button {
+            width: 100%; padding: 13px; background: #0ea5e9; border: none; border-radius: 8px;
+            color: white; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 8px;
+        }
+        .login-box button:hover { background: #0284c7; }
+        .login-error { color: #f87171; font-size: 13px; margin-top: 8px; display: none; }
+
+        /* ── Dashboard ── */
+        #dashboard { display: none; }
+        .topbar {
+            background: #1e293b; border-bottom: 1px solid #334155;
+            padding: 14px 24px; display: flex; align-items: center; justify-content: space-between;
+        }
+        .topbar h1 { font-size: 20px; color: #38bdf8; }
+        .topbar .right { display: flex; align-items: center; gap: 16px; }
+        .live-dot {
+            display: inline-block; width: 8px; height: 8px; background: #22c55e;
+            border-radius: 50%; animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+        .logout-btn {
+            background: #334155; border: none; color: #94a3b8; padding: 6px 14px;
+            border-radius: 6px; cursor: pointer; font-size: 13px;
+        }
+        .logout-btn:hover { background: #475569; color: #e2e8f0; }
+
+        .stats { display: flex; gap: 16px; padding: 20px 24px; flex-wrap: wrap; }
+        .stat {
+            background: #1e293b; border: 1px solid #334155; border-radius: 10px;
+            padding: 16px 24px; flex: 1; min-width: 140px;
+        }
+        .stat .num { font-size: 28px; font-weight: 700; color: #38bdf8; }
+        .stat .label { color: #94a3b8; font-size: 12px; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+        .table-wrap { padding: 0 24px 24px; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; background: #1e293b; border-radius: 10px; overflow: hidden; }
+        th { background: #334155; padding: 11px 14px; text-align: left; font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; }
+        td { padding: 11px 14px; border-bottom: 1px solid #1e293b; font-size: 13px; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #263148; }
+        .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; }
+        .BOARD { background: #064e3b; color: #34d399; }
+        .EXIT { background: #7f1d1d; color: #f87171; }
+        .rfid { font-family: monospace; color: #fbbf24; font-size: 12px; }
+        .ts { color: #94a3b8; font-size: 12px; }
+        .empty { text-align: center; color: #94a3b8; padding: 48px; }
+
+        .refresh-info { color: #64748b; font-size: 12px; padding: 0 24px 12px; }
+    </style>
+</head>
+<body>
+
+<!-- ── Login Screen ── -->
+<div id="login-screen">
+    <div class="login-box">
+        <div class="logo">🏫</div>
+        <h1>ScaleCipher</h1>
+        <p>RFID Attendance System</p>
+        <input type="text" id="username" placeholder="Username" autocomplete="username">
+        <input type="password" id="password" placeholder="Password" autocomplete="current-password">
+        <button onclick="doLogin()">Sign In</button>
+        <div class="login-error" id="login-error">Invalid username or password</div>
+    </div>
+</div>
+
+<!-- ── Dashboard ── -->
+<div id="dashboard">
+    <div class="topbar">
+        <h1>🏫 ScaleCipher Attendance</h1>
+        <div class="right">
+            <span><span class="live-dot"></span> Live</span>
+            <span id="last-updated" style="color:#64748b;font-size:12px"></span>
+            <button class="logout-btn" onclick="doLogout()">Logout</button>
+        </div>
+    </div>
+
+    <div class="stats">
+        <div class="stat"><div class="num" id="s-total">—</div><div class="label">Total Events</div></div>
+        <div class="stat"><div class="num" id="s-board">—</div><div class="label">Board</div></div>
+        <div class="stat"><div class="num" id="s-exit">—</div><div class="label">Exit</div></div>
+        <div class="stat"><div class="num" id="s-cards">—</div><div class="label">Unique Cards</div></div>
+    </div>
+
+    <div class="refresh-info">Auto-refreshes every 5 seconds</div>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Timestamp</th>
+                    <th>RFID Card</th>
+                    <th>Event</th>
+                    <th>Signal</th>
+                    <th>Device</th>
+                </tr>
+            </thead>
+            <tbody id="events-body">
+                <tr><td colspan="6" class="empty">Loading...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    // ── Credentials (client-side, for GitHub Pages) ──
+    const CREDENTIALS = { username: "admin", password: "scalecipher2026" };
+    const API_URL = "http://15.206.166.236:8081/api/v1/events/all?limit=200";
+    const SESSION_KEY = "sc_auth";
+
+    // ── Login ──
+    function doLogin() {
+        const u = document.getElementById("username").value.trim();
+        const p = document.getElementById("password").value;
+        if (u === CREDENTIALS.username && p === CREDENTIALS.password) {
+            sessionStorage.setItem(SESSION_KEY, "1");
+            showDashboard();
+        } else {
+            document.getElementById("login-error").style.display = "block";
+        }
+    }
+
+    document.getElementById("password").addEventListener("keydown", e => {
+        if (e.key === "Enter") doLogin();
+    });
+
+    function doLogout() {
+        sessionStorage.removeItem(SESSION_KEY);
+        document.getElementById("dashboard").style.display = "none";
+        document.getElementById("login-screen").style.display = "flex";
+    }
+
+    function showDashboard() {
+        document.getElementById("login-screen").style.display = "none";
+        document.getElementById("dashboard").style.display = "block";
+        loadEvents();
+        setInterval(loadEvents, 5000);
+    }
+
+    // ── Load Events ──
+    async function loadEvents() {
+        try {
+            const res = await fetch(API_URL);
+            const data = await res.json();
+            const events = data.events || [];
+
+            document.getElementById("s-total").textContent = events.length;
+            document.getElementById("s-board").textContent = events.filter(e => e.event_type === "BOARD").length;
+            document.getElementById("s-exit").textContent = events.filter(e => e.event_type === "EXIT").length;
+            document.getElementById("s-cards").textContent = new Set(events.map(e => e.rfid_uid)).size;
+            document.getElementById("last-updated").textContent = "Updated: " + new Date().toLocaleTimeString();
+
+            const tbody = document.getElementById("events-body");
+            if (events.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="empty">No events yet. Tap an RFID card!</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = events.slice(0, 100).map((e, i) => `
+                <tr>
+                    <td style="color:#64748b">${i + 1}</td>
+                    <td class="ts">${e.event_timestamp.replace("T", " ").substring(0, 19)}</td>
+                    <td class="rfid">${e.rfid_uid}</td>
+                    <td><span class="badge ${e.event_type}">${e.event_type}</span></td>
+                    <td style="color:#94a3b8">${e.wifi_rssi} dBm</td>
+                    <td style="color:#64748b;font-size:12px">${e.device_id ? e.device_id.toString().substring(0, 8) + "..." : "—"}</td>
+                </tr>
+            `).join("");
+        } catch (err) {
+            document.getElementById("events-body").innerHTML =
+                '<tr><td colspan="6" class="empty" style="color:#f87171">Error loading data: ' + err.message + '</td></tr>';
+        }
+    }
+
+    // ── Auto-login if session exists ──
+    if (sessionStorage.getItem(SESSION_KEY)) {
+        showDashboard();
+    }
+</script>
+</body>
+</html>
