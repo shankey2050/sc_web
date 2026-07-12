@@ -3,8 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio — Projects</title>
-  <link rel="stylesheet" href="portfolio/css/main.css" />
+  <!-- Cache-busting: force browsers to always fetch fresh content -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>Portfolio — Shashank Maurya</title>
+  <link rel="stylesheet" href="portfolio/css/main.css?v=20260712" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -236,16 +240,6 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════ FOOTER ═══ -->
-  <footer class="site-footer">
-    <div class="container">
-      <p>Portfolio &bull; Projects are loaded dynamically from the <code>projects/</code> folder</p>
-      <p class="footer-hint">
-        To add a new project: copy <code>projects/template.html</code>, fill in the JSON data block, and add the filename to <code>projects/manifest.json</code>.
-      </p>
-    </div>
-  </footer>
-
   <!-- ═══════════════════════════════════════════ PROJECT MODAL ═══ -->
   <div id="project-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
     <div class="modal-backdrop" id="modal-backdrop"></div>
@@ -259,6 +253,6 @@
     </div>
   </div>
 
-  <script src="portfolio/js/main.js"></script>
+  <script src="portfolio/js/main.js?v=20260712"></script>
 </body>
 </html>
