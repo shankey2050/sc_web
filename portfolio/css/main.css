@@ -881,20 +881,6 @@ img { max-width: 100%; display: block; }
   flex-shrink: 0;
 }
 
-.lt-header {
-  padding: 14px 24px 0;
-  max-width: 1280px;
-  margin: 0 auto;
-}
-
-.lt-section-label {
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .14em;
-  color: var(--text-muted);
-}
-
 .lt-outer {
   position: relative;
   display: flex;
@@ -915,8 +901,8 @@ img { max-width: 100%; display: block; }
   display: flex;
   align-items: center;
   position: relative;
-  height: 120px;
-  padding: 0 48px;
+  height: 88px;
+  padding: 0 40px;
   min-width: max-content;
 }
 
@@ -936,8 +922,8 @@ img { max-width: 100%; display: block; }
   flex-direction: column;
   align-items: center;
   position: relative;
-  min-width: 150px;
-  height: 120px;
+  min-width: 140px;
+  height: 88px;
   flex-shrink: 0;
 }
 
@@ -1023,20 +1009,32 @@ img { max-width: 100%; display: block; }
 }
 
 .lt-year {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   color: var(--text-primary);
   font-family: var(--font-mono);
 }
 .lt-name {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
   color: var(--text-secondary);
 }
 .lt-sub {
-  font-size: 10px;
+  font-size: 9px;
   color: var(--text-muted);
 }
+
+/* ── Company event highlight — dotted box ───────────────────── */
+.lt-join .lt-label,
+.lt-transition .lt-label {
+  border: 1px dashed var(--border-hover);
+  border-radius: 5px;
+  padding: 3px 7px;
+  background: rgba(255,255,255,.03);
+}
+
+.lt-join .lt-label { border-color: rgba(16,185,129,.4); }
+.lt-transition .lt-label { border-color: rgba(249,115,22,.4); }
 
 .lt-life .lt-dot       { background: #f59e0b; }
 .lt-edu .lt-dot        { background: var(--accent); }
@@ -1058,8 +1056,8 @@ img { max-width: 100%; display: block; }
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 100px;
-  height: 120px;
+  min-width: 80px;
+  height: 88px;
   flex-shrink: 0;
   position: relative;
   z-index: 1;
@@ -1178,7 +1176,7 @@ img { max-width: 100%; display: block; }
   .header-stats { display: none; }
   .modal-content { padding: 20px; }
   .modal-meta-row { gap: 12px; }
-  .lt-track { height: 110px; }
+  .lt-track { height: 80px; }
 }
 
 @media (max-width: 480px) {
