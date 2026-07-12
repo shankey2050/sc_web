@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Projects</title>
+  <link rel="stylesheet" href="portfolio/css/main.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════ HEADER ═══ -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <div class="header-identity">
+          <div class="avatar" aria-hidden="true">P</div>
+          <div>
+            <h1 class="header-name">My Portfolio</h1>
+            <p class="header-subtitle">Engineering Projects &amp; Work History</p>
+          </div>
+        </div>
+        <div class="header-stats" id="header-stats">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════ CONTROLS ═══ -->
+  <section class="controls-bar">
+    <div class="container">
+      <div class="controls-inner">
+
+        <div class="search-wrap">
+          <svg class="search-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <circle cx="8.5" cy="8.5" r="5.75" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M13 13l3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <input
+            type="text"
+            id="search-input"
+            class="search-input"
+            placeholder="Search projects, technologies, companies…"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="filter-group">
+          <select id="company-filter" class="filter-select">
+            <option value="">All Companies</option>
+          </select>
+
+          <select id="tech-filter" class="filter-select">
+            <option value="">All Technologies</option>
+          </select>
+
+          <select id="area-filter" class="filter-select">
+            <option value="">All Work Areas</option>
+          </select>
+
+          <select id="status-filter" class="filter-select">
+            <option value="">All Status</option>
+            <option value="ongoing">Ongoing</option>
+            <option value="completed">Completed</option>
+          </select>
+
+          <select id="sort-select" class="filter-select">
+            <option value="date-desc">Newest First</option>
+            <option value="date-asc">Oldest First</option>
+            <option value="title-asc">Title A–Z</option>
+            <option value="title-desc">Title Z–A</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="active-filters" id="active-filters"></div>
+      <p class="results-count" id="results-count"></p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ GRID ═══ -->
+  <main class="main-content">
+    <div class="container">
+      <div id="projects-grid" class="projects-grid">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <p>Loading projects…</p>
+        </div>
+      </div>
+
+      <div id="empty-state" class="empty-state" hidden>
+        <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <circle cx="32" cy="32" r="28" stroke="currentColor" stroke-width="2" opacity=".3"/>
+          <path d="M22 32h20M32 22v20" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+        </svg>
+        <h3>No projects found</h3>
+        <p>Try adjusting your filters or search query.</p>
+        <button class="btn-reset" id="reset-filters">Reset Filters</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- ═══════════════════════════════════════════ FOOTER ═══ -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>Portfolio &bull; Projects are loaded dynamically from the <code>projects/</code> folder</p>
+      <p class="footer-hint">
+        To add a new project: copy <code>projects/template.html</code>, fill in the JSON data block, and add the filename to <code>projects/manifest.json</code>.
+      </p>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════ PROJECT MODAL ═══ -->
+  <div id="project-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal-panel">
+      <button class="modal-close" id="modal-close" aria-label="Close">
+        <svg viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <div id="modal-content" class="modal-content">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <script src="portfolio/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ML Training Pipeline — Project Detail</title>
+
+  <script type="application/json" id="project-data">
+  {
+    "id": "ml-pipeline",
+    "title": "Distributed ML Training & Inference Pipeline",
+    "company": "DataAI Inc.",
+    "role": "Machine Learning Engineer",
+
+    "startDate": "2023-03",
+    "endDate": null,
+    "status": "ongoing",
+
+    "description": "Building a fault-tolerant, distributed ML training pipeline that processes 50TB of daily sensor data, trains production models on a Kubernetes GPU cluster, and serves real-time inference at 10K RPS with p99 latency under 30ms.",
+
+    "detailedDescription": "Designed and continue to evolve a large-scale ML platform that ingests raw IoT sensor telemetry, runs feature engineering at scale using Apache Spark, trains deep learning models on a multi-node GPU cluster managed by Kubernetes, and exposes a low-latency inference API. The system replaced a fragile collection of cron jobs and manual notebooks with a fully automated, observable, and reproducible ML lifecycle. Model versioning, experiment tracking, and automated A/B testing are first-class citizens of the platform. The inference layer uses ONNX Runtime with TensorRT optimisation to achieve sub-30ms p99 latency at 10K requests per second.",
+
+    "majorWorkAreas": [
+      "ML Platform Engineering",
+      "Distributed Systems",
+      "Data Engineering",
+      "Model Serving & Optimisation",
+      "MLOps & Observability",
+      "Feature Store Design"
+    ],
+
+    "technologies": [
+      "Python", "PyTorch", "TensorFlow", "ONNX Runtime", "TensorRT",
+      "Apache Spark", "Apache Kafka", "Apache Airflow",
+      "Kubernetes", "Kubeflow", "MLflow",
+      "NVIDIA CUDA", "Ray", "Triton Inference Server",
+      "PostgreSQL", "Redis", "MinIO (S3-compatible)",
+      "Prometheus", "Grafana", "OpenTelemetry",
+      "Docker", "Helm", "Terraform"
+    ],
+
+    "responsibilities": [
+      "Designed the end-to-end ML pipeline architecture from data ingestion to model serving",
+      "Built the feature engineering layer using PySpark, processing 50TB of daily sensor data in under 2 hours",
+      "Implemented distributed training with PyTorch DDP across 16 A100 GPUs, reducing training time by 8×",
+      "Developed the model serving layer using Triton Inference Server with TensorRT optimisation",
+      "Built an automated model evaluation and promotion system with statistical significance testing",
+      "Designed the feature store schema and implemented point-in-time correct feature retrieval",
+      "Set up comprehensive ML observability: data drift detection, model performance monitoring, and alerting"
+    ],
+
+    "highlights": [
+      "Reduced model training time from 48 hours to 6 hours through distributed training and mixed-precision (FP16)",
+      "Inference p99 latency dropped from 180ms to 28ms after TensorRT optimisation and batching",
+      "Feature pipeline processes 50TB daily with 99.95% SLA, down from 40% failure rate with the legacy system",
+      "Automated A/B testing framework enabled 3× faster model iteration cycles",
+      "Implemented data drift detection that caught a critical sensor calibration issue before it impacted production models"
+    ],
+
+    "challenges": [
+      "GPU memory fragmentation during long training runs: Solved by implementing gradient checkpointing and custom memory-efficient attention, enabling 2× larger batch sizes",
+      "Point-in-time correctness in the feature store: Designed a temporal join strategy using event-time watermarks in Spark Structured Streaming to prevent data leakage",
+      "Cold-start latency for model loading: Implemented model warm-up pools and predictive pre-loading based on traffic patterns, reducing cold-start from 8s to 200ms"
+    ],
+
+    "outcome": "The platform is currently in production, serving 10K+ inference requests per second across 12 deployed models. It has enabled the data science team to ship new models 3× faster and has reduced model-related production incidents by 85% compared to the previous year.",
+
+    "impactMetric": "8× faster model training",
+    "teamSize": 6,
+
+    "tags": ["ml", "mlops", "distributed-systems", "python", "kubernetes", "data-engineering"],
+
+    "links": {
+      "github": "https://github.com/example/ml-pipeline",
+      "docs": "https://ml-platform-docs.example.com",
+      "paper": "https://arxiv.org/abs/example"
+    }
+  }
+  </script>
+</head>
+<body>
+  <script src="../js/project.js"></script>
+</body>
+</html>

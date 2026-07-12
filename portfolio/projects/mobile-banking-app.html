@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mobile Banking App — Project Detail</title>
+
+  <script type="application/json" id="project-data">
+  {
+    "id": "mobile-banking-app",
+    "title": "Cross-Platform Mobile Banking Application",
+    "company": "FinTech Solutions Ltd.",
+    "role": "Lead Mobile Engineer",
+
+    "startDate": "2021-06",
+    "endDate": "2022-02",
+    "status": "completed",
+
+    "description": "Led development of a cross-platform mobile banking app (iOS & Android) serving 200K+ customers, featuring biometric authentication, real-time transaction notifications, and PCI-DSS compliant payment flows.",
+
+    "detailedDescription": "Took ownership of the mobile engineering workstream for FinTech Solutions' flagship consumer banking product. The app was built with React Native and TypeScript, targeting both iOS and Android from a single codebase. The project required navigating strict PCI-DSS and GDPR compliance requirements while delivering a smooth, modern UX. Key technical work included implementing end-to-end encrypted communication with the banking core, building a real-time notification system using Firebase Cloud Messaging, and integrating biometric authentication (Face ID, Touch ID, Android Biometric API). The app was delivered 2 weeks ahead of schedule and received a 4.7-star rating on both app stores within the first month.",
+
+    "majorWorkAreas": [
+      "Mobile Development (iOS & Android)",
+      "Security & Compliance (PCI-DSS, GDPR)",
+      "Real-Time Systems",
+      "Authentication & Authorisation",
+      "GraphQL API Integration",
+      "Performance & Accessibility"
+    ],
+
+    "technologies": [
+      "React Native", "TypeScript", "Expo",
+      "GraphQL", "Apollo Client",
+      "Firebase (FCM, Analytics, Crashlytics)",
+      "Redux Toolkit", "React Query",
+      "Biometric API (Face ID / Touch ID / Android Biometric)",
+      "Jest", "Detox (E2E testing)",
+      "Fastlane", "GitHub Actions",
+      "Sentry", "Flipper"
+    ],
+
+    "responsibilities": [
+      "Led a team of 4 mobile engineers; ran daily standups, sprint planning, and code reviews",
+      "Architected the React Native app structure, navigation system, and state management strategy",
+      "Implemented PCI-DSS compliant card data handling using tokenisation and secure enclave storage",
+      "Built the biometric authentication module supporting Face ID, Touch ID, and Android Biometric API",
+      "Designed and implemented the real-time transaction notification system with push and in-app delivery",
+      "Established E2E testing with Detox, achieving 85% coverage of critical user journeys",
+      "Coordinated with the backend team to design GraphQL schemas optimised for mobile data requirements",
+      "Managed App Store and Google Play submission process, including compliance reviews and release notes"
+    ],
+
+    "highlights": [
+      "App achieved 4.7-star rating on both App Store and Google Play within the first month of launch",
+      "Biometric authentication adoption reached 78% of active users within 2 weeks of release",
+      "Crash-free rate of 99.96% maintained across 200K+ active devices",
+      "Delivered 2 weeks ahead of the original schedule despite mid-project scope additions",
+      "Reduced app bundle size by 42% through code splitting, tree shaking, and asset optimisation",
+      "Achieved WCAG 2.1 AA accessibility compliance, the first mobile product at FinTech Solutions to do so"
+    ],
+
+    "challenges": [
+      "PCI-DSS compliance on mobile: Worked with the security team to implement tokenisation for all card data, using the device secure enclave for key storage and ensuring no sensitive data was ever written to disk or logs",
+      "Cross-platform biometric inconsistency: Android and iOS biometric APIs behave differently; built an abstraction layer that normalised the experience and handled edge cases like enrolled-biometrics-changed gracefully",
+      "Real-time notification reliability: FCM delivery is not guaranteed; implemented a fallback polling mechanism and in-app notification inbox to ensure users never missed a critical transaction alert"
+    ],
+
+    "outcome": "The app launched in February 2022 to 200K existing customers and onboarded 50K new users in the first 90 days. Customer satisfaction scores for digital banking rose from 3.8 to 4.6 out of 5. The codebase was subsequently used as the foundation for FinTech Solutions' business banking app.",
+
+    "impactMetric": "4.7★ on both app stores",
+    "teamSize": 4,
+
+    "tags": ["mobile", "react-native", "fintech", "ios", "android", "security"],
+
+    "links": {
+      "demo": "https://apps.apple.com/example",
+      "github": "https://github.com/example/mobile-banking"
+    }
+  }
+  </script>
+</head>
+<body>
+  <script src="../js/project.js"></script>
+</body>
+</html>

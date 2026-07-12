@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<!--
+  ╔══════════════════════════════════════════════════════════════════╗
+  ║  PROJECT TEMPLATE  —  my_portfolio                               ║
+  ╠══════════════════════════════════════════════════════════════════╣
+  ║  HOW TO ADD A NEW PROJECT                                        ║
+  ║  ──────────────────────────────────────────────────────────────  ║
+  ║  1. Copy this file and rename it  (e.g. my-new-project.html)     ║
+  ║  2. Fill in every field in the JSON block below                  ║
+  ║  3. Add the new filename to  projects/manifest.json              ║
+  ║  4. Refresh the portfolio page — your tile appears automatically  ║
+  ║                                                                  ║
+  ║  FIELD REFERENCE  (★ = required,  ○ = optional)                  ║
+  ║  ──────────────────────────────────────────────────────────────  ║
+  ║  ★ id               STRING   Unique kebab-case slug              ║
+  ║  ★ title            STRING   Full project name                   ║
+  ║  ★ company          STRING   Employer / organisation             ║
+  ║  ○ role             STRING   Your job title on this project      ║
+  ║  ★ startDate        STRING   "YYYY-MM"  e.g. "2023-03"           ║
+  ║  ○ endDate          STRING   "YYYY-MM"  null if ongoing          ║
+  ║  ★ status           ENUM     "ongoing" | "completed" | "paused"  ║
+  ║  ★ description      STRING   1–2 sentence tile summary           ║
+  ║  ○ detailedDescription STRING Long-form detail modal text        ║
+  ║  ★ majorWorkAreas   ARRAY    High-level work domains             ║
+  ║  ★ technologies     ARRAY    All languages / frameworks / tools  ║
+  ║  ○ responsibilities ARRAY    Your specific tasks                 ║
+  ║  ○ highlights       ARRAY    Key achievements / milestones       ║
+  ║  ○ challenges       ARRAY    Problems faced and how solved       ║
+  ║  ○ outcome          STRING   Final result / business impact      ║
+  ║  ○ impactMetric     STRING   Headline metric for tile footer     ║
+  ║  ○ teamSize         NUMBER   Total team headcount                ║
+  ║  ○ tags             ARRAY    Free-form category tags             ║
+  ║  ○ links.demo       STRING   Live demo URL                       ║
+  ║  ○ links.github     STRING   GitHub repository URL               ║
+  ║  ○ links.docs       STRING   Documentation URL                   ║
+  ║  ○ links.paper      STRING   Paper / report URL                  ║
+  ║  ○ links.<custom>   STRING   Any other named URL                 ║
+  ╚══════════════════════════════════════════════════════════════════╝
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Title — Portfolio</title>
+
+  <!--
+    ══════════════════════════════════════════════════════════════
+    PROJECT DATA BLOCK
+    ──────────────────────────────────────────────────────────────
+    • The portfolio page (index.html) fetches this file and parses
+      the JSON below to build the tile card and detail modal.
+    • Do NOT change the id="project-data" attribute.
+    • All string values use standard JSON — no trailing commas.
+    • Delete any optional fields you don't need.
+    ══════════════════════════════════════════════════════════════
+  -->
+  <script type="application/json" id="project-data">
+  {
+    "id": "your-project-slug",
+    "title": "Your Project Title",
+    "company": "Company Name",
+    "role": "Your Role / Title",
+
+    "startDate": "YYYY-MM",
+    "endDate": "YYYY-MM",
+    "status": "completed",
+
+    "description": "One or two sentence summary shown on the project tile. Keep it concise and impactful.",
+
+    "detailedDescription": "Full description shown in the detail modal. Explain the project context, the problem being solved, your approach, and the outcome. Multiple sentences are fine here.",
+
+    "majorWorkAreas": [
+      "Work Area 1",
+      "Work Area 2",
+      "Work Area 3"
+    ],
+
+    "technologies": [
+      "Language / Framework 1",
+      "Language / Framework 2",
+      "Tool / Platform 3"
+    ],
+
+    "responsibilities": [
+      "Specific responsibility or task you owned",
+      "Another key responsibility",
+      "Technical decision you made or led"
+    ],
+
+    "highlights": [
+      "Key achievement with a measurable result",
+      "Another notable milestone or outcome",
+      "Recognition, award, or business impact"
+    ],
+
+    "challenges": [
+      "Challenge description: how you identified it and the solution you implemented",
+      "Another technical or organisational challenge and its resolution"
+    ],
+
+    "outcome": "Describe the final result — what shipped, what improved, what the business impact was.",
+
+    "impactMetric": "e.g. 40% latency reduction",
+
+    "teamSize": 5,
+
+    "tags": [
+      "category-tag-1",
+      "category-tag-2"
+    ],
+
+    "links": {
+      "demo":   "https://your-demo-url.com",
+      "github": "https://github.com/you/repo",
+      "docs":   "https://docs.your-project.com",
+      "paper":  "https://arxiv.org/abs/your-paper"
+    }
+  }
+  </script>
+</head>
+<body>
+  <!--
+    The body is intentionally empty for the portfolio tile system.
+    The portfolio page (index.html) reads the JSON above and renders
+    both the tile card and the detail modal automatically.
+
+    For a standalone detail page (when the file is opened directly),
+    project.js reads the same JSON and renders a full-page layout.
+  -->
+  <script src="../js/project.js"></script>
+</body>
+</html>

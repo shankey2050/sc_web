@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E-Commerce Platform — Project Detail</title>
+
+  <script type="application/json" id="project-data">
+  {
+    "id": "ecommerce-platform",
+    "title": "Scalable E-Commerce Platform",
+    "company": "TechCorp Solutions",
+    "role": "Senior Full-Stack Engineer",
+
+    "startDate": "2022-01",
+    "endDate": "2022-12",
+    "status": "completed",
+
+    "description": "Architected and delivered a high-traffic e-commerce platform handling 500K+ daily active users, featuring real-time inventory management, personalised recommendations, and a sub-200ms checkout flow.",
+
+    "detailedDescription": "Led the end-to-end design and implementation of a greenfield e-commerce platform to replace a legacy monolith that was struggling under peak load. The new system was built as a set of loosely coupled microservices deployed on AWS, with a React-based storefront backed by a Node.js API gateway. Key engineering challenges included designing a distributed inventory reservation system that prevented overselling under flash-sale conditions, and building a recommendation engine that served personalised product suggestions with p99 latency under 80ms. The platform launched on schedule and immediately handled Black Friday traffic (3× normal load) without degradation.",
+
+    "majorWorkAreas": [
+      "Microservices Architecture",
+      "Frontend Development",
+      "API Design & Integration",
+      "Database Design",
+      "Performance Optimisation",
+      "CI/CD & DevOps"
+    ],
+
+    "technologies": [
+      "React", "TypeScript", "Node.js", "Express",
+      "PostgreSQL", "Redis", "Elasticsearch",
+      "AWS (ECS, RDS, ElastiCache, S3, CloudFront)",
+      "Docker", "Kubernetes", "GitHub Actions",
+      "GraphQL", "Stripe API", "Datadog"
+    ],
+
+    "responsibilities": [
+      "Designed the overall microservices architecture and defined inter-service communication contracts",
+      "Built the React storefront with SSR via Next.js, achieving a Lighthouse performance score of 94",
+      "Implemented the distributed inventory reservation system using Redis Lua scripts to ensure atomicity",
+      "Designed and optimised PostgreSQL schemas; reduced average query time by 60% through indexing and query rewrites",
+      "Set up CI/CD pipelines with GitHub Actions, enabling zero-downtime blue-green deployments",
+      "Mentored 3 junior engineers and conducted weekly architecture review sessions",
+      "Collaborated with the product and design teams to translate business requirements into technical specifications"
+    ],
+
+    "highlights": [
+      "Reduced page load time from 4.2s to 0.9s through CDN optimisation, code splitting, and image lazy-loading",
+      "Inventory reservation system achieved 99.999% accuracy during a 72-hour flash sale with 1.2M concurrent users",
+      "Checkout conversion rate improved by 18% after redesigning the payment flow",
+      "Platform handled 3× Black Friday traffic with zero downtime and p99 API latency of 145ms",
+      "Reduced infrastructure costs by 35% by right-sizing ECS tasks and implementing auto-scaling policies"
+    ],
+
+    "challenges": [
+      "Distributed inventory consistency: Solved overselling under concurrent flash-sale load by using Redis atomic Lua scripts for reservation and a saga pattern for order fulfilment rollback",
+      "Search relevance at scale: Integrated Elasticsearch with a custom scoring model that boosted conversion-correlated signals, improving click-through rate by 22%",
+      "Legacy data migration: Migrated 8 years of order history from the legacy Oracle DB to PostgreSQL with zero data loss using a dual-write strategy and automated reconciliation scripts"
+    ],
+
+    "outcome": "The platform launched in December 2022 and processed over $12M in revenue in its first month. It replaced a system that had caused three major outages in the previous year. The architecture has since been adopted as the internal standard for all new e-commerce initiatives at TechCorp.",
+
+    "impactMetric": "$12M revenue in first month",
+    "teamSize": 8,
+
+    "tags": ["fullstack", "ecommerce", "microservices", "aws", "react", "nodejs"],
+
+    "links": {
+      "demo": "https://example-ecommerce.com",
+      "github": "https://github.com/example/ecommerce-platform",
+      "docs": "https://docs.example-ecommerce.com"
+    }
+  }
+  </script>
+</head>
+<body>
+  <script src="../js/project.js"></script>
+</body>
+</html>
