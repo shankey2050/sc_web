@@ -167,154 +167,323 @@ img { max-width: 100%; display: block; }
   margin-top: 4px;
 }
 
-/* ── About Section ──────────────────────────────────────────── */
-.about-section {
+/* ═══════════════════════════════════════════════════════════════
+   LIFE TIMELINE
+   ═══════════════════════════════════════════════════════════════ */
+.lt-section {
   background: var(--bg-surface);
-  border-bottom: 1px solid var(--border);
-  padding: 32px 0;
+  border-top: 1px solid var(--border);
+  user-select: none;
 }
 
-.about-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: start;
+.lt-header {
+  padding: 14px 24px 0;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
-.about-bio {
-  font-size: 14px;
-  color: var(--text-secondary);
-  line-height: 1.75;
-  margin-bottom: 24px;
-}
-
-.about-bio strong { color: var(--text-primary); }
-
-.about-sub-title {
+.lt-section-label {
   font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: .12em;
+  letter-spacing: .14em;
   color: var(--text-muted);
-  margin-bottom: 14px;
+}
+
+/* Outer wrapper — holds scroll area + nav buttons */
+.lt-outer {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 8px;
 }
 
-.about-sub-title::after {
-  content: '';
+/* Scroll container */
+.lt-scroll {
   flex: 1;
-  height: 1px;
-  background: var(--border);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
 }
+.lt-scroll::-webkit-scrollbar { display: none; }
 
-/* Education */
-.about-education { display: flex; flex-direction: column; gap: 12px; }
-
-.edu-item {
+/* Track — the actual timeline row */
+.lt-track {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding: 10px 14px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  border-left: 3px solid var(--accent);
-}
-
-.edu-degree {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.edu-school {
-  font-size: 12px;
-  color: var(--text-muted);
-}
-
-/* Work Timeline */
-.work-timeline {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+  align-items: center;
   position: relative;
-  padding-left: 20px;
+  height: 190px;
+  padding: 0 48px;
+  min-width: max-content;
 }
 
-.work-timeline::before {
+/* Horizontal centre line */
+.lt-track::before {
   content: '';
   position: absolute;
-  left: 6px;
-  top: 8px;
-  bottom: 8px;
-  width: 2px;
+  left: 0; right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 2px;
   background: var(--border);
+  z-index: 0;
 }
 
-.wt-item {
+/* ── Event node ─────────────────────────────────────────────── */
+.lt-event {
   display: flex;
-  gap: 14px;
-  align-items: flex-start;
-  padding-bottom: 20px;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  min-width: 150px;
+  height: 190px;
+  flex-shrink: 0;
+}
+
+/* Dot on the line */
+.lt-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--border-hover);
+  border: 2px solid var(--bg-surface);
+  flex-shrink: 0;
+  z-index: 2;
   position: relative;
 }
 
-.wt-item:last-child { padding-bottom: 0; }
-
-.wt-marker {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--bg-card);
-  border: 2px solid var(--border-hover);
-  flex-shrink: 0;
-  margin-top: 2px;
-  position: absolute;
-  left: -20px;
-  top: 2px;
+/* Vertical connector between dot and label */
+.lt-connector {
+  width: 1px;
+  flex: 1;
+  background: var(--border);
   z-index: 1;
 }
 
-.wt-current .wt-marker {
-  background: var(--accent);
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-glow);
-}
-
-.wt-body {
+/* Label block */
+.lt-label {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  align-items: center;
+  gap: 1px;
+  padding: 6px 0;
+  text-align: center;
 }
 
-.wt-company {
-  font-size: 13.5px;
-  font-weight: 600;
+/* Above: label → connector → dot (label at top, dot at centre) */
+.lt-above {
+  justify-content: flex-start;
+  padding-top: calc(50% - 95px); /* align dot to centre */
+}
+.lt-above { flex-direction: column; }
+.lt-above .lt-label  { order: 1; justify-content: flex-end; flex: 1; }
+.lt-above .lt-connector { order: 2; }
+.lt-above .lt-dot    { order: 3; }
+
+/* Below: dot → connector → label (dot at centre, label at bottom) */
+.lt-below { flex-direction: column; }
+.lt-below .lt-dot    { order: 1; }
+.lt-below .lt-connector { order: 2; }
+.lt-below .lt-label  { order: 3; justify-content: flex-start; flex: 1; }
+
+/* Align dot to the horizontal centre line */
+.lt-above {
+  padding-top: 0;
+  justify-content: center;
+}
+.lt-below {
+  justify-content: center;
+}
+
+/* Re-do with explicit heights so dot always sits on the line */
+.lt-above .lt-label  { height: calc(50% - 8px); justify-content: flex-end; }
+.lt-above .lt-connector { height: 0; flex: none; }
+.lt-above .lt-dot    { /* sits at 50% */ }
+
+.lt-below .lt-dot    { /* sits at 50% */ }
+.lt-below .lt-connector { height: 0; flex: none; }
+.lt-below .lt-label  { height: calc(50% - 8px); justify-content: flex-start; }
+
+/* Simpler absolute approach */
+.lt-event { position: relative; }
+
+.lt-above .lt-dot {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+.lt-above .lt-connector {
+  position: absolute;
+  left: 50%; top: 0;
+  width: 1px;
+  height: calc(50% - 8px);
+  background: var(--border);
+  transform: translateX(-50%);
+}
+.lt-above .lt-label {
+  position: absolute;
+  bottom: calc(50% + 14px);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.lt-below .lt-dot {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+.lt-below .lt-connector {
+  position: absolute;
+  left: 50%; bottom: 0;
+  width: 1px;
+  height: calc(50% - 8px);
+  background: var(--border);
+  transform: translateX(-50%);
+}
+.lt-below .lt-label {
+  position: absolute;
+  top: calc(50% + 14px);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+/* Label text */
+.lt-year {
+  font-size: 11px;
+  font-weight: 700;
   color: var(--text-primary);
+  font-family: var(--font-mono);
 }
-
-.wt-current .wt-company { color: var(--accent-light); }
-
-.wt-role {
-  font-size: 12px;
+.lt-name {
+  font-size: 11px;
+  font-weight: 600;
   color: var(--text-secondary);
 }
+.lt-sub {
+  font-size: 10px;
+  color: var(--text-muted);
+}
 
-.wt-dates {
-  font-size: 11px;
+/* ── Dot colours by type ────────────────────────────────────── */
+.lt-life .lt-dot       { background: #f59e0b; }
+.lt-edu .lt-dot        { background: var(--accent); }
+.lt-join .lt-dot       { background: #10b981; }
+.lt-transition .lt-dot { background: #f97316; }
+.lt-current .lt-dot    {
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-glow);
+  animation: lt-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes lt-pulse {
+  0%,100% { box-shadow: 0 0 0 4px var(--accent-glow); }
+  50%      { box-shadow: 0 0 0 8px rgba(99,102,241,.04); }
+}
+
+/* ── Fast-forward segment ───────────────────────────────────── */
+.lt-ff {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;
+  height: 190px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Dashed override for the ff segment */
+.lt-ff::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--border) 0, var(--border) 6px,
+    transparent 6px, transparent 14px
+  );
+  z-index: 0;
+}
+
+.lt-ff-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 4px 10px;
+  z-index: 1;
+  position: relative;
+  font-size: 13px;
+}
+
+.lt-ff-label {
+  font-size: 9px;
   color: var(--text-muted);
   font-family: var(--font-mono);
-  margin-top: 2px;
+  letter-spacing: .04em;
 }
 
-@media (max-width: 768px) {
-  .about-inner {
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
+/* ── End padding ────────────────────────────────────────────── */
+.lt-end-pad { min-width: 48px; flex-shrink: 0; }
+
+/* ── Nav scroll buttons ─────────────────────────────────────── */
+.lt-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-hover);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  z-index: 20;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition), background var(--transition), color var(--transition);
+  box-shadow: 0 2px 8px rgba(0,0,0,.4);
 }
+
+.lt-nav.lt-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lt-nav:hover { background: var(--border-hover); color: var(--text-primary); }
+.lt-nav svg   { width: 14px; height: 14px; }
+
+.lt-nav-left  { left: 10px; }
+.lt-nav-right { right: 10px; }
+
+/* Fade edges when scrollable */
+.lt-outer::before,
+.lt-outer::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 60px;
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+.lt-outer::before { left: 0;  background: linear-gradient(90deg, var(--bg-surface), transparent); }
+.lt-outer::after  { right: 0; background: linear-gradient(-90deg, var(--bg-surface), transparent); }
+.lt-outer.lt-can-scroll-left::before  { opacity: 1; }
+.lt-outer.lt-can-scroll-right::after  { opacity: 1; }
 
 /* ── Controls Bar ───────────────────────────────────────────── */
 .controls-bar {

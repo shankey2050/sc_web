@@ -40,7 +40,7 @@ const modalBackdrop = document.getElementById('modal-backdrop');
    ═══════════════════════════════════════════════════════════════ */
 (async function init() {
   try {
-    const manifest = await fetchJSON('portfolio/projects/manifest.json');
+    const manifest = await fetchJSON('projects/manifest.json');
     const files    = manifest.projects || [];
 
     if (files.length === 0) {
@@ -97,7 +97,7 @@ async function fetchJSON(url) {
 
 async function loadProject(filename) {
   try {
-    const url = 'portfolio/projects/' + filename;
+    const url = 'projects/' + filename;
     const res = await fetch(url);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const html = await res.text();
@@ -602,6 +602,48 @@ function calcDuration(start, end, status) {
   const rem = months % 12;
   return rem > 0 ? `${yrs}y ${rem}m` : `${yrs} year${yrs !== 1 ? 's' : ''}`;
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   LIFE TIMELINE — SCROLL CONTROLS
+   ═══════════════════════════════════════════════════════════════ */
+
+(function initTimeline() {
+  const outer   = document.getElementById('lt-outer');
+  const scroll  = document.getElementById('lt-scroll');
+  const btnLeft = document.getElementById('lt-nav-left');
+  const btnRight= document.getElementById('lt-nav-right');
+
+  if (!outer || !scroll || !btnLeft || !btnRight) return;
+
+  const STEP = 320; // px per button click
+
+  function update() {
+    const { scrollLeft, scrollWidth, clientWidth } = scroll;
+    const canLeft  = scrollLeft > 2;
+    const canRight = scrollLeft < scrollWidth - clientWidth - 2;
+
+    btnLeft.classList.toggle('lt-visible', canLeft);
+    btnRight.classList.toggle('lt-visible', canRight);
+    outer.classList.toggle('lt-can-scroll-left',  canLeft);
+    outer.classList.toggle('lt-can-scroll-right', canRight);
+  }
+
+  btnLeft.addEventListener('click',  () => { scroll.scrollBy({ left: -STEP, behavior: 'smooth' }); });
+  btnRight.addEventListener('click', () => { scroll.scrollBy({ left:  STEP, behavior: 'smooth' }); });
+
+  scroll.addEventListener('scroll', update, { passive: true });
+
+  // Run on load and whenever the window resizes
+  update();
+  window.addEventListener('resize', update, { passive: true });
+
+  // Also run after fonts/images settle
+  window.addEventListener('load', update);
+})();
+
+/* ═══════════════════════════════════════════════════════════════
+   HELPERS
+   ═══════════════════════════════════════════════════════════════ */
 
 /**
  * Deterministic color from company name string.
