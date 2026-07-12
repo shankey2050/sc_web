@@ -40,7 +40,7 @@ const modalBackdrop = document.getElementById('modal-backdrop');
    ═══════════════════════════════════════════════════════════════ */
 (async function init() {
   try {
-    const manifest = await fetchJSON('projects/manifest.json');
+    const manifest = await fetchJSON('portfolio/projects/manifest.json');
     const files    = manifest.projects || [];
 
     if (files.length === 0) {
@@ -97,7 +97,7 @@ async function fetchJSON(url) {
 
 async function loadProject(filename) {
   try {
-    const url = 'projects/' + filename;
+    const url = 'portfolio/projects/' + filename;
     const res = await fetch(url);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const html = await res.text();
